@@ -27,5 +27,8 @@
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.70.0",
 		"yamllint-js": "^0.2.4"
+	},
+	"patchedDependencies": {
+		"@elysia/openapi@1.4.16": "patches/@elysia%2Fopenapi@1.4.16.patch"
 	}
 }

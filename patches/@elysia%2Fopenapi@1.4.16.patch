@@ -1,0 +1,23 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index ea2d0d4fff24fb950dcef0bf25ede511545a30bb..9038c1e43dd3e4806a72cb6adc400ed2d14b1e94 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -257,7 +257,7 @@ var ScalarRender = (info, config2, embedSpec) => `<!doctype html>
+       }
+     </style>
+     <style>
+-      ${config2.customCss ?? elysiaCSS}
++      ${config2.customCss ?? ""}
+     </style>
+   </head>
+   <body>
+@@ -265,6 +265,9 @@ var ScalarRender = (info, config2, embedSpec) => `<!doctype html>
+       id="api-reference"
+       data-configuration='${JSON.stringify(
+   Object.assign(
++    {
++      theme: "elysiajs"
++    },
+     config2,
+     {
+       content: embedSpec
