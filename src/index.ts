@@ -9,4 +9,5 @@ app.listen({
 	port: env.PORT,
 }, ({ url }) => {
 	console.log(`🦊 Elysia is running at ${url.toString()}`);
+	console.log(`  - Docs: ${url.toString()}docs`);
 });
