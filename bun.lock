@@ -5,10 +5,10 @@
     "": {
       "name": "api",
       "dependencies": {
-        "elysia": "latest",
+        "elysia": "^1.4.30",
       },
       "devDependencies": {
-        "bun-types": "latest",
+        "bun-types": "^1.4.2",
       },
     },
   },
