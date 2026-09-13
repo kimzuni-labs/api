@@ -8,6 +8,7 @@
 		"dev": "bun run --watch src/index.ts",
 		"lint": "run-s lint:*",
 		"lint:markdown": "markdownlint-cli2 .",
+		"lint:yaml": "yamllint-js .",
 		"lint:eslint": "eslint ."
 	},
 	"dependencies": {
@@ -21,6 +22,7 @@
 		"markdownlint-cli2": "^0.23.2",
 		"npm-run-all": "^4.1.5",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.70.0"
+		"typescript-eslint": "^8.70.0",
+		"yamllint-js": "^0.2.4"
 	}
 }
