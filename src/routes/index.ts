@@ -1,2 +1,2 @@
-export { global } from "./global";
-export { v1 } from "./v1";
+export { getGlobal } from "./global";
+export { getV1 } from "./v1";

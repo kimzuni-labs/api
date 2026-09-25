@@ -1,12 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { global } from "@/routes";
-
-import { getAPI } from "./common";
-
-
-
-const api = getAPI(global);
+import { api } from "./common";
 
 
 

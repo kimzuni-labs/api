@@ -7,6 +7,14 @@ import * as routes from "@/routes";
 
 
 
+export const unifiedApp = new Elysia({
+	...options.elysia,
+})
+	.use(routes.getGlobal())
+	.use(routes.getV1());
+
+
+
 export const app = new Elysia({
 	...options.elysia,
 })
@@ -39,5 +47,5 @@ export const app = new Elysia({
 			],
 		},
 	}))
-	.all("*", (ctx) => routes.global.handle(ctx.request))
-	.all("/v1*", (ctx) => routes.v1.handle(ctx.request));
+	.all("*", (ctx) => routes.getGlobal().handle(ctx.request))
+	.all("/v1*", (ctx) => routes.getV1().handle(ctx.request));

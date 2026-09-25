@@ -5,7 +5,7 @@ import * as plugins from "@/plugins";
 
 
 
-export const v1 = new Elysia({
+export const getV1 = () => new Elysia({
 	...options.elysia,
 	prefix: "/v1",
 })
