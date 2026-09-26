@@ -2,6 +2,7 @@ import { Elysia } from "elysia";
 import type { ValidationError, TSchema } from "elysia";
 
 import { env } from "@/config";
+import * as plugins from "@/plugins";
 
 import { AppError, ErrorModel, type ValidationErrorResponse } from "@/shared/error";
 
@@ -10,15 +11,18 @@ import { AppError, ErrorModel, type ValidationErrorResponse } from "@/shared/err
 type ValueErrorWithSummary = ValidationError["all"][number];
 type ErrorType = Extract<ValueErrorWithSummary, { path: string }> & { schema: { anyOf?: TSchema[] } };
 
-const parseError = (error: ErrorType) => {
+const parseError = (
+	error: ErrorType,
+	t: (key: string) => string,
+) => {
 	const data: ValidationErrorResponse["details"]["errors"][number] = {
 		key: null,
-		message: error.summary,
+		message: error.summary && t(error.summary),
 	};
 
 	if ("path" in error) {
 		data.key = error.path.slice(1).trim() || null;
-		data.message = error.schema.error !== undefined && typeof error.schema.error !== "function" ? String(error.schema.error) : error.summary;
+		data.message = error.schema.error !== undefined && typeof error.schema.error !== "function" ? t(String(error.schema.error)) : error.summary && t(error.summary);
 		data.pattern = typeof error.schema.pattern === "string" ? error.schema.pattern : undefined;
 		data.enum = Array.isArray(error.schema.enum) ? (error.schema.enum as (string | number)[]) : undefined;
 		data.minimum = typeof error.schema.minimum === "number" ? error.schema.minimum : undefined;
@@ -46,9 +50,12 @@ const parseError = (error: ErrorType) => {
 	return data;
 };
 
-const parseErrors = (errors: ValueErrorWithSummary[]) => errors.reduce<ValidationErrorResponse["details"]["errors"]>((acc, cur) => {
+const parseErrors = (
+	errors: ValueErrorWithSummary[],
+	t: (key: string) => string,
+) => errors.reduce<ValidationErrorResponse["details"]["errors"]>((acc, cur) => {
 	if (cur.summary !== undefined && "path" in cur) {
-		acc.push(parseError(cur));
+		acc.push(parseError(cur, t));
 	}
 	return acc;
 }, []);
@@ -60,7 +67,10 @@ export const errorHandler = new Elysia({ name: "plugin.errorHandler" })
 		APP_ERROR: AppError,
 	})
 	.use(ErrorModel)
-	.onError({ as: "global" }, ({ code, error, set }) => {
+	.use(plugins.i18n())
+	.onError({ as: "global" }, ({ code, error, set, t }) => {
+		const dt = (key: string) => t(key as unknown as Parameters<typeof t>[0]);
+
 		let err: Readonly<AppError>;
 		let errors: ValidationErrorResponse["details"]["errors"] | undefined;
 		switch (code) {
@@ -71,10 +81,10 @@ export const errorHandler = new Elysia({ name: "plugin.errorHandler" })
 				err = new AppError(404).setCode("NOT_FOUND_ERROR");
 				break;
 			case "VALIDATION":
-				errors = parseErrors(error.all);
+				errors = parseErrors(error.all, dt);
 				err = new AppError({
 					status: error.status,
-					message: errors[0]?.message ?? error.messageValue?.message ?? error.message,
+					message: dt(errors[0]?.message ?? error.messageValue?.message ?? error.message),
 					details: {
 						location: error.type as ValidationErrorResponse["details"]["location"],
 						errors,

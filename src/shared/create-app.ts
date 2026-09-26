@@ -18,7 +18,8 @@ const createBaseApp = <
 >(opts: CreateAppOptions<Prefix> = {}) => new Elysia({
 	strictPath: constants.STRICT_PATH,
 	...opts,
-});
+})
+	.use(plugins.i18n());
 
 
 

@@ -1,5 +1,7 @@
 import { Elysia } from "elysia";
 
+import * as locales from "@/locales";
+
 
 
 export interface Item {
@@ -12,7 +14,7 @@ export interface LocaleOptions {
 }
 
 export function locale({
-	languages = ["en", "ko"],
+	languages = locales.languages,
 }: LocaleOptions = {}) {
 	const defaultLang = languages[0] ?? "en";
 

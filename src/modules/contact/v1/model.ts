@@ -18,7 +18,7 @@ export const sendEmailRequest = t.Object({
 }, {
 	title: "Send Email Request",
 	minProperties: 1,
-	error: "subject or content is required.",
+	error: "error.validation.contact_no_subject_and_content",
 });
 
 export type SendEmailResponse = typeof sendEmailResponse.static;

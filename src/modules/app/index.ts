@@ -12,9 +12,9 @@ export const app = createSubRouter({
 	.use(AppModel)
 	.get(
 		"/",
-		() => ({
-			title: info.title,
-			description: info.description,
+		({ t }) => ({
+			title: t($ => $.app.title),
+			description: t($ => $.app.description),
 			version: info.version,
 		}),
 		{

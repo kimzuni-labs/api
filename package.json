@@ -19,6 +19,7 @@
 	"dependencies": {
 		"@elysia/openapi": "^1.4.16",
 		"elysia": "^1.4.30",
+		"i18next": "^26.4.2",
 		"nodemailer": "^10.0.10"
 	},
 	"devDependencies": {
