@@ -1,6 +1,7 @@
 import { Elysia } from "elysia";
 
 import { options } from "@/config";
+import { errorHandler } from "@/shared/error";
 import * as plugins from "@/plugins";
 
 import * as routes from "@/routes";
@@ -10,6 +11,7 @@ import * as routes from "@/routes";
 export const unifiedApp = new Elysia({
 	...options.elysia,
 })
+	.use(errorHandler)
 	.use(routes.getGlobal())
 	.use(routes.getV1());
 
@@ -18,6 +20,7 @@ export const unifiedApp = new Elysia({
 export const app = new Elysia({
 	...options.elysia,
 })
+	.use(errorHandler)
 	.use(plugins.scalar({
 		config: {
 			// https://scalar.com/products/api-references/configuration#properties
