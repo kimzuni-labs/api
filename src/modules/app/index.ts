@@ -1,12 +1,11 @@
-import { Elysia } from "elysia";
-
 import { app as info } from "@/config";
+import { createSubRouter } from "@/shared/create-app";
 
 import { AppModel } from "./model";
 
 
 
-export const app = new Elysia({
+export const app = createSubRouter({
 	prefix: "",
 	tags: ["App"],
 })

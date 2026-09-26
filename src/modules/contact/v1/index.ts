@@ -1,11 +1,11 @@
-import { Elysia } from "elysia";
+import { createSubRouter } from "@/shared/create-app";
 
 import { EmailModel } from "./model";
 import { emailService } from "./service";
 
 
 
-export const emails = new Elysia({
+export const emails = createSubRouter({
 	prefix: "/contact",
 	tags: ["Contact"],
 })
