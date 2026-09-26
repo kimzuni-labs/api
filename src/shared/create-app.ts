@@ -31,8 +31,7 @@ export const createApp = <
 export const createRouter = <
 	Prefix extends string = "",
 >(opts: CreateAppOptions<Prefix> = {}) => createBaseApp(opts)
-	.use(errorHandler)
-	.use(plugins.openapi());
+	.use(errorHandler);
 
 export const createSubRouter = <
 	Prefix extends string = "",
