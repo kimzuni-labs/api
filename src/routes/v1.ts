@@ -3,6 +3,7 @@ import { Elysia } from "elysia";
 import { options } from "@/config";
 import { errorHandler } from "@/shared/error";
 import * as plugins from "@/plugins";
+import { contact } from "@/modules";
 
 
 
@@ -12,4 +13,4 @@ export const getV1 = () => new Elysia({
 })
 	.use(errorHandler)
 	.use(plugins.openapi())
-	.get("", () => ({ v1: true }));
+	.use(contact.v1);
