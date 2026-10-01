@@ -9,6 +9,7 @@ export default defineConfig(
 	{
 		ignores: [
 			"eslint.config.js",
+			"commitlint.config.js",
 			"yamllint-js.config.js",
 		],
 	},
