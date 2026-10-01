@@ -41,3 +41,9 @@ yarn-error.log*
 **/*.log
 package-lock.json
 **/*.bun
+
+
+
+# custom
+
+docker-compose.override.yml

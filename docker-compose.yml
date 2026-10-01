@@ -1,0 +1,10 @@
+---
+services:
+  rest-api:
+    image: ghcr.io/kimzuni-labs/api:latest
+    container_name: labs-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    labels:
+      com.centurylinklabs.watchtower.enable: true
