@@ -1,3 +1,4 @@
 [test]
 root = "./tests"
 coverageSkipTestFiles = true
+preload = "./tests/preload.ts"
