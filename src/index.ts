@@ -1,9 +1,12 @@
-import { Elysia } from "elysia";
+import { env } from "@/config";
+import { app } from "@/app";
 
 
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
-
-console.log(
-	`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,
-);
+app.listen({
+	reusePort: true,
+	development: env.NODE_ENV !== "production",
+	port: env.PORT,
+}, ({ url }) => {
+	console.log(`🦊 Elysia is running at ${url.toString()}`);
+});

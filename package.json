@@ -6,8 +6,10 @@
 	"module": "src/index.js",
 	"private": true,
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "bun run --watch src/index.ts",
+		"test": "bun test",
+		"test:coverage": "bun test --coverage",
+		"dev": "bun run --watch --no-clear-screen src/index.ts",
+		"start": "bun run src/index.ts",
 		"lint": "run-s lint:*",
 		"lint:markdown": "markdownlint-cli2 .",
 		"lint:yaml": "yamllint-js .",
@@ -19,6 +21,7 @@
 		"elysia": "^1.4.30"
 	},
 	"devDependencies": {
+		"@elysia/eden": "^1.4.10",
 		"@eslint/js": "^10.0.1",
 		"@stylistic/eslint-plugin": "^5.10.0",
 		"bun-types": "^1.4.2",
