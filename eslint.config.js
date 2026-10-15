@@ -67,6 +67,12 @@ export default defineConfig(
 			"@typescript-eslint/no-inferrable-types": [
 				"off",
 			],
+			"@typescript-eslint/no-confusing-void-expression": [
+				"error",
+				{
+					ignoreArrowShorthand: true,
+				},
+			],
 		},
 	},
 	{

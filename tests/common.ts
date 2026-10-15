@@ -1,3 +1,4 @@
+import { spyOn } from "bun:test";
 import type { AnyElysia } from "elysia";
 import { treaty, type Treaty } from "@elysia/eden";
 
@@ -25,3 +26,18 @@ export const getAPI = <
 
 
 export const api = getAPI(app);
+
+
+
+export const consoleErrorSpy = async (
+	levels: ("error" | "warn" | "info" | "debug" | "trace" | "log")[],
+	cb: () => unknown,
+) => {
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	const spys = levels.map(level => spyOn(console, level).mockImplementation(() => {}));
+	try {
+		await cb();
+	} finally {
+		spys.map(spy => spy.mockRestore());
+	}
+};

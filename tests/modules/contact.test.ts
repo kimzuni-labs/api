@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, spyOn, test, type Mock } from 
 import { transporter } from "@/modules/contact/v1/service";
 import { env } from "@/config";
 
-import { api } from "../common";
+import { api, consoleErrorSpy } from "../common";
 
 
 
@@ -84,19 +84,24 @@ describe("Contact API (v1/contact)", () => {
 	});
 
 	test("should handle SMTP failure and return 500 AppError", async () => {
-		sendMailSpy.mockImplementation(() => Promise.reject(new Error("SMTP Connection Error")));
+		await consoleErrorSpy(
+			["error"],
+			async () => {
+				sendMailSpy.mockImplementation(() => Promise.reject(new Error("SMTP Connection Error")));
 
-		const res = await api.v1.contact.post({
-			subject: "Failure Test",
-			content: "This should fail",
-		});
+				const res = await api.v1.contact.post({
+					subject: "Failure Test",
+					content: "This should fail",
+				});
 
-		expect(res.status).toBe(500);
-		expect(res.error?.value).toMatchObject({
-			error: true,
-			status: 500,
-			message: "An error occurred while sending the email.",
-			details: null,
-		});
+				expect(res.status).toBe(500);
+				expect(res.error?.value).toMatchObject({
+					error: true,
+					status: 500,
+					message: "An error occurred while sending the email.",
+					details: null,
+				});
+			},
+		);
 	});
 });
