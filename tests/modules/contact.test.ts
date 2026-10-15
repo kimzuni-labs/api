@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, spyOn, test, type Mock } from 
 import { transporter } from "@/modules/contact/v1/service";
 import { env } from "@/config";
 
-import { api } from "./common";
+import { api } from "../common";
 
 
 

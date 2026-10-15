@@ -3,7 +3,7 @@ import { Elysia } from "elysia";
 
 import { i18n } from "@/plugins";
 
-import { getAPI } from "./common";
+import { getAPI } from "../common";
 
 
 

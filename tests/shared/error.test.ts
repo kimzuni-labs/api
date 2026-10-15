@@ -3,7 +3,7 @@ import { Elysia, t } from "elysia";
 
 import { AppError, errorHandler } from "@/shared/error";
 
-import { app, unifiedApp, getAPI } from "./common";
+import { app, unifiedApp, getAPI } from "../common";
 
 
 

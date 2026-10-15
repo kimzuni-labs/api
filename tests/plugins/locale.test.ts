@@ -3,7 +3,7 @@ import { Elysia } from "elysia";
 
 import { locale } from "@/plugins";
 
-import { getAPI } from "./common";
+import { getAPI } from "../common";
 
 
 

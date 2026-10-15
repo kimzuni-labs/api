@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { app } from "./common";
+import { app } from "../common";
 
 
 

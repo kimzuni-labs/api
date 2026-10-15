@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { api } from "./common";
+import { api } from "../common";
 
 
 
