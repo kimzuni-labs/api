@@ -1,13 +1,12 @@
 import type { AnyElysia } from "elysia";
 import { treaty, type Treaty } from "@elysia/eden";
 
-import { app, unifiedApp } from "@/app";
+import { app } from "@/app";
 
 
 
 export {
 	app,
-	unifiedApp,
 };
 
 
@@ -25,4 +24,4 @@ export const getAPI = <
 
 
 
-export const api = getAPI(unifiedApp);
+export const api = getAPI(app);

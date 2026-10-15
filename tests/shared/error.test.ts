@@ -3,7 +3,7 @@ import { Elysia, t } from "elysia";
 
 import { AppError, errorHandler } from "@/shared/error";
 
-import { app, unifiedApp, getAPI } from "../common";
+import { app, getAPI } from "../common";
 
 
 
@@ -67,22 +67,8 @@ describe("AppError Class", () => {
 });
 
 describe("Error Handler Plugin", () => {
-	test("should return 404 JSON response for unknown routes on app", async () => {
+	test("should return 404 JSON response for unknown routes", async () => {
 		const res = await app.handle(new Request("http://localhost/non-existent-route"));
-
-		expect(res.status).toBe(404);
-		expect(res.headers.get("content-type") ?? "").toContain("application/json");
-		expect(res.json()).resolves.toEqual({
-			error: true,
-			code: "NOT_FOUND_ERROR",
-			status: 404,
-			message: "Not Found",
-			details: null,
-		});
-	});
-
-	test("should return 404 JSON response for unknown routes on unifiedApp", async () => {
-		const res = await unifiedApp.handle(new Request("http://localhost/v1/non-existent-route"));
 
 		expect(res.status).toBe(404);
 		expect(res.headers.get("content-type") ?? "").toContain("application/json");

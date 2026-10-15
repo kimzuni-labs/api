@@ -1,11 +1,12 @@
-import { createRouter } from "@/shared/create-app";
+import { Elysia } from "elysia";
 import * as plugins from "@/plugins";
 import { app, health } from "@/modules";
 
 
 
-export const getGlobal = () => createRouter()
+export const global = new Elysia()
 	.use(plugins.openapi({
+		isGlobal: true,
 		tags: [
 			{
 				name: "App",

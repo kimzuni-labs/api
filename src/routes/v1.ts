@@ -1,11 +1,13 @@
-import { createRouter } from "@/shared/create-app";
+import { Elysia } from "elysia";
+import * as config from "@/config";
 import * as plugins from "@/plugins";
 import { contact } from "@/modules";
 
 
 
-export const getV1 = () => createRouter({ prefix: "/v1" })
+export const v1 = new Elysia({ prefix: "/v1" })
 	.use(plugins.openapi({
+		version: config.app.version,
 		tags: [
 			{
 				name: "Contact",

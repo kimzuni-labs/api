@@ -8,9 +8,8 @@ import { getAPI } from "../common";
 
 
 describe("Locale Plugin", () => {
-	const supportedLanguages = ["en", "ko"];
 	const testApp = new Elysia()
-		.use(locale({ languages: supportedLanguages }))
+		.use(locale)
 		.get("/", ({ lang }) => ({
 			lang,
 		}));

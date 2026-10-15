@@ -67,7 +67,7 @@ export const errorHandler = new Elysia({ name: "plugin.errorHandler" })
 		APP_ERROR: AppError,
 	})
 	.use(ErrorModel)
-	.use(plugins.i18n())
+	.use(plugins.i18n)
 	.onError({ as: "global" }, ({ code, error, set, t }) => {
 		const dt = (key: string) => t(key as unknown as Parameters<typeof t>[0]);
 

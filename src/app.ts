@@ -1,22 +1,24 @@
-import { createApp } from "@/shared/create-app";
+import { Elysia } from "elysia";
+
+import { constants } from "@/config";
 import * as plugins from "@/plugins";
+import { errorHandler } from "@/shared/error";
 
 import * as routes from "@/routes";
 
 
 
-export const unifiedApp = createApp()
-	.use(routes.getGlobal())
-	.use(routes.getV1());
-
-
-
-export const app = createApp()
+export const app = new Elysia({
+	strictPath: constants.STRICT_PATH,
+})
+	.use(errorHandler)
+	.use(plugins.i18n)
 	.use(plugins.scalar({
 		config: {
 			// https://scalar.com/products/api-references/configuration#properties
 			version: "1.68",
 			theme: "default",
+			hideModels: true,
 			persistAuth: true,
 			showOperationId: false,
 			defaultOpenFirstTag: false,
@@ -41,5 +43,5 @@ export const app = createApp()
 			],
 		},
 	}))
-	.all("*", (ctx) => routes.getGlobal().handle(ctx.request))
-	.all("/v1*", (ctx) => routes.getV1().handle(ctx.request));
+	.use(routes.global)
+	.use(routes.v1);

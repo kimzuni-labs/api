@@ -9,7 +9,7 @@ import { getAPI } from "../common";
 
 describe("i18n Plugin & Locale Integration", () => {
 	const testApp = new Elysia()
-		.use(i18n())
+		.use(i18n)
 		.get("/", ({ lang, t }) => ({
 			lang,
 			appTitle: t($ => $.app.title),

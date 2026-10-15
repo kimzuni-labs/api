@@ -1,14 +1,17 @@
+import { Elysia } from "elysia";
+
 import { app as info } from "@/config";
-import { createSubRouter } from "@/shared/create-app";
+import * as plugins from "@/plugins";
 
 import { AppModel } from "./model";
 
 
 
-export const app = createSubRouter({
+export const app = new Elysia({
 	prefix: "",
 	tags: ["App"],
 })
+	.use(plugins.i18n)
 	.use(AppModel)
 	.get(
 		"/",

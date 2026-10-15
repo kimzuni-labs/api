@@ -34,19 +34,22 @@ const initI18n = <T>({
 
 
 
-export function i18n<T = object>(options: I18nOptions<T> = {}) {
-	const i18nInstance = initI18n(options);
-	const getInstance = (lang: string) => i18nInstance.cloneInstance().getFixedT(lang);
+const i18nInstance = initI18n({
+});
 
-	return new Elysia({
-		name: "plugin.i18n",
+const getInstance = (lang: string) => i18nInstance.cloneInstance().getFixedT(lang);
+
+
+
+export const i18n = new Elysia({
+	name: "plugin.i18n",
+})
+	.use(locale)
+	.decorate(({ lang }) => {
+		const t = getInstance(lang);
+		return { lang, t };
 	})
-		.use(locale())
-		.decorate(({ lang }) => {
-			const t = getInstance(lang);
-			return { lang, t };
-		})
-		.onRequest(ctx => {
-			ctx.t = getInstance(ctx.lang);
-		});
-}
+	.onRequest(ctx => {
+		ctx.t = getInstance(ctx.lang);
+	})
+	.as("global");
