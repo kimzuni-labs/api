@@ -61,11 +61,19 @@ export const scalar = ({
 
 	plugin.get(
 		constants.API_DOCS_PATH,
-		() => new Response(
+		({ request }) => new Response(
 			getHTML({
 				title: title ?? app.title,
 				description: description ?? app.description,
-				config: config ?? {},
+				config: {
+					servers: [
+						{
+							url: new URL(request.url).origin,
+							description: "Current Server",
+						},
+					],
+					...config,
+				},
 			}),
 			{
 				headers: { "content-type": "text/html; charset=utf8" },
