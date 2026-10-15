@@ -1,1 +1,1 @@
-export { emails as v1 } from "./v1";
+export { contact as v1 } from "./v1";

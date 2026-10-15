@@ -1,20 +1,20 @@
 import { Elysia } from "elysia";
 
-import { EmailModel } from "./model";
-import { emailService } from "./service";
+import { ContactModel } from "./model";
+import { contactService } from "./service";
 
 
 
-export const emails = new Elysia({
+export const contact = new Elysia({
 	prefix: "/contact",
 	tags: ["Contact"],
 })
-	.use(EmailModel)
-	.use(emailService)
+	.use(ContactModel)
+	.use(contactService)
 	.get(
 		"",
-		({ email }) => ({
-			email: email.to,
+		({ contact }) => ({
+			email: contact.to,
 		}),
 		{
 			response: "contactResponse",
@@ -26,7 +26,7 @@ export const emails = new Elysia({
 	)
 	.post(
 		"",
-		({ body, email }) => email.send(body),
+		({ body, contact }) => contact.send(body),
 		{
 			body: "sendEmailRequest",
 			response: "sendEmailResponse",

@@ -20,8 +20,8 @@ export const transporter = nodemailer.createTransport({
 
 
 
-export const emailService = new Elysia({ name: "v1.contact.service" })
-	.decorate("email", {
+export const contactService = new Elysia({ name: "v1.contact.service" })
+	.decorate("contact", {
 		to: env.MAIL_TO,
 		async send({
 			subject,

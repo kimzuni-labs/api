@@ -31,8 +31,8 @@ export const sendEmailResponse = t.Object({
 
 
 
-export const EmailModel = new Elysia({
-	name: "email.model",
+export const ContactModel = new Elysia({
+	name: "v1.contact.model",
 })
 	.model({
 		contactResponse,
@@ -40,4 +40,4 @@ export const EmailModel = new Elysia({
 		sendEmailResponse,
 	});
 
-export const models = EmailModel.models;
+export const models = ContactModel.models;
