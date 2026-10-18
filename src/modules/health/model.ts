@@ -17,7 +17,7 @@ export const healthCheck = t.Object({
 
 
 export const HealthModel = new Elysia({
-	name: "health.model",
+	name: "v1.health.model",
 })
 	.model({
 		healthCheck,
