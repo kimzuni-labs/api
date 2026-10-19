@@ -1,7 +1,7 @@
 {
 	"name": "api",
 	"version": "1.0.0",
-	"description": "Multi-purpose REST API infrastructure for kimzuni-labs",
+	"description": "Multi-purpose REST API server for kimzuni-labs",
 	"type": "module",
 	"module": "src/index.js",
 	"private": true,

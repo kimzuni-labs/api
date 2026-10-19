@@ -43,7 +43,7 @@ jobs:
             org.opencontainers.image.authors=me@zuni.kim
             org.opencontainers.image.vendor=kimzuni-labs
             org.opencontainers.image.title=REST API for kimzuni-labs
-            org.opencontainers.image.description=Multi-purpose REST API infrastructure
+            org.opencontainers.image.description=Multi-purpose REST API server
             org.opencontainers.image.documentation=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.ref.name=${{ github.ref_name }}
 
