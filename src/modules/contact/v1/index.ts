@@ -26,10 +26,12 @@ export const contact = new Elysia({
 	)
 	.post(
 		"",
-		({ body, contact }) => contact.send(body),
+		async ({ status, body, contact }) => status(201, await contact.send(body)),
 		{
 			body: "sendEmailRequest",
-			response: "sendEmailResponse",
+			response: {
+				201: "sendEmailResponse",
+			},
 			detail: {
 				summary: "Send Email",
 				description: "Send an email using the provided subject and content.",

@@ -40,7 +40,7 @@ describe("Contact API (v1/contact)", () => {
 			content: "Test Content Hello World",
 		});
 
-		expect(res.status).toBe(200);
+		expect(res.status).toBe(201);
 		expect(res.data).toEqual({
 			success: true,
 			message: "Successfully sent the email.",
@@ -55,7 +55,7 @@ describe("Contact API (v1/contact)", () => {
 			content: "Eden Treaty Content",
 		});
 
-		expect(status).toBe(200);
+		expect(status).toBe(201);
 		expect(error).toBeNull();
 		expect(data).toEqual({
 			success: true,
