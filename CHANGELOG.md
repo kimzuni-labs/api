@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/kimzuni-labs/api/compare/v1.0.0...v1.0.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* add cors plugin with @elysiajs/cors ([78e89f8](https://github.com/kimzuni-labs/api/commit/78e89f8f77ef43a074b4ede4145708767146c8ab))
+* update email send response status code ([293f437](https://github.com/kimzuni-labs/api/commit/293f4378e712c165e2cb859c77e4f9dfd432c93a))
+
 # 1.0.0 (2026-10-01)
 
 
