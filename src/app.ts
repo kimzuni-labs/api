@@ -11,6 +11,7 @@ import * as routes from "@/routes";
 export const app = new Elysia({
 	strictPath: constants.STRICT_PATH,
 })
+	.use(plugins.cors)
 	.use(errorHandler)
 	.use(plugins.i18n)
 	.use(plugins.scalar({

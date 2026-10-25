@@ -17,6 +17,7 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
+		"@elysia/cors": "^1.4.2",
 		"@elysia/openapi": "^1.4.16",
 		"elysia": "^1.4.30",
 		"i18next": "^26.4.2",

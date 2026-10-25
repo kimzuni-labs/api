@@ -1,3 +1,5 @@
+export { cors } from "./cors";
+
 export { openapi } from "./openapi";
 export { scalar } from "./scalar";
 
