@@ -4,11 +4,12 @@ import type { InitOptions } from "i18next";
 
 import * as locales from "@/locales";
 
-import { locale, type LocaleOptions } from "./locale";
+import { locale } from "./locale";
 
 
 
-export interface I18nOptions<T> extends InitOptions<T>, LocaleOptions {
+export interface I18nOptions<T> extends InitOptions<T> {
+	languages?: string[];
 }
 
 const initI18n = <T>({

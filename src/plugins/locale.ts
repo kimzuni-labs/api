@@ -9,13 +9,9 @@ const defaultLang = languages[0] ?? "en";
 
 
 
-export interface Item {
+interface Item {
 	lang: string;
 	q: number;
-}
-
-export interface LocaleOptions {
-	languages?: string[];
 }
 
 export const locale = new Elysia({
