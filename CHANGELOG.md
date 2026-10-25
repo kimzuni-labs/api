@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/kimzuni-labs/api/compare/v1.0.1...v1.0.2) (2026-10-25)
+
+
+### Bug Fixes
+
+* current server url proto in api docs ([5371716](https://github.com/kimzuni-labs/api/commit/5371716df58b404cbb5616ea34a2f7a442e1c5f3))
+
 ## [1.0.1](https://github.com/kimzuni-labs/api/compare/v1.0.0...v1.0.1) (2026-10-25)
 
 
