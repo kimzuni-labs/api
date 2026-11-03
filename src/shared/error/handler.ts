@@ -1,5 +1,4 @@
 import { Elysia, NotFound, ParseError, ValidationError, InvalidCookie, InternalServerError, type ElysiaError } from "elysia";
-import type { TFunction } from "i18next";
 
 import * as plugins from "@/plugins";
 
@@ -7,8 +6,8 @@ import { ErrorModel } from "@/shared/error";
 
 
 
-function toResponse(t: TFunction, error: ElysiaError) {
-	const msg = t(error.message as unknown as Parameters<typeof t>[0]);
+function toResponse(t: (key: string) => string, error: ElysiaError) {
+	const msg = t(error.message);
 	return {
 		error: true,
 		code: error.code,
@@ -20,26 +19,26 @@ function toResponse(t: TFunction, error: ElysiaError) {
 export const errorHandler = new Elysia({ name: "plugin.errorHandler" })
 	.use(ErrorModel)
 	.use(plugins.i18n)
-	.onError(NotFound, ({ error, t }) => {
-		return toResponse(t, error);
+	.onError(NotFound, ({ error, dotT }) => {
+		return toResponse(dotT, error);
 	})
-	.onError(ParseError, ({ error, t }) => {
-		return toResponse(t, error);
+	.onError(ParseError, ({ error, dotT }) => {
+		return toResponse(dotT, error);
 	})
-	.onError(ValidationError, ({ error, t }) => {
-		const res = toResponse(t, error);
+	.onError(ValidationError, ({ error, dotT }) => {
+		const res = toResponse(dotT, error);
 		return {
 			...res,
-			...error.detail(res.message),
+			...error.detail(dotT(res.message)),
 		};
 	})
-	.onError(InvalidCookie, ({ error, t }) => {
-		return toResponse(t, error);
+	.onError(InvalidCookie, ({ error, dotT }) => {
+		return toResponse(dotT, error);
 	})
-	.onError(InternalServerError, ({ error, t }) => {
+	.onError(InternalServerError, ({ error, dotT }) => {
 		console.error("============= ERROR =============");
 		console.error(error);
 		console.error("============= ERROR END =============");
-		return toResponse(t, error);
+		return toResponse(dotT, error);
 	})
 	.as("plugin");

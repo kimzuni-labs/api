@@ -22,3 +22,14 @@ export interface LocaleTranslations {
 		};
 	};
 }
+
+
+
+type DotPaths<T> = T extends object
+	? {
+		[K in keyof T & string]: T[K] extends object
+			? `${K}.${DotPaths<T[K]>}`
+			: K;
+	}[keyof T & string]
+	: never;
+export type LocaleDotTranslations = DotPaths<LocaleTranslations>;
