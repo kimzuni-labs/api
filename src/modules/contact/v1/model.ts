@@ -13,12 +13,12 @@ export const contactResponse = t.Object({
 
 export type SendEmailRequest = UnwrapSchema<typeof sendEmailRequest>;
 export const sendEmailRequest = t.Object({
-	subject: t.Optional(t.String()),
-	content: t.Optional(t.String()),
+	subject: t.Optional(t.String({ error: "error.validation.contact.subjectIsNotString" })),
+	content: t.Optional(t.String({ error: "error.validation.contact.contentIsNotString" })),
 }, {
 	title: "Send Email Request",
 	minProperties: 1,
-	error: "error.validation.contact_no_subject_and_content",
+	error: "error.validation.contact.noSubjectAndContent",
 });
 
 export type SendEmailResponse = UnwrapSchema<typeof sendEmailResponse>;

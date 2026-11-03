@@ -5,9 +5,20 @@ export interface LocaleTranslations {
 		description: string;
 	};
 
+	contact: {
+		sendMail: {
+			successfully: string;
+			failed: string;
+		};
+	};
+
 	error: {
 		validation: {
-			contact_no_subject_and_content: string;
+			contact: {
+				subjectIsNotString: string;
+				contentIsNotString: string;
+				noSubjectAndContent: string;
+			};
 		};
 	};
 }

@@ -2,6 +2,7 @@ import { Elysia, InternalServerError } from "elysia";
 import nodemailer from "nodemailer";
 
 import { env } from "@/config";
+import * as plugins from "@/plugins";
 
 import * as model from "./model";
 
@@ -20,29 +21,32 @@ export const transporter = nodemailer.createTransport({
 
 
 export const contactService = new Elysia({ name: "v1.contact.service" })
-	.decorate("contact", {
-		to: env.MAIL_TO,
-		async send({
-			subject,
-			content,
-		}: model.SendEmailRequest): Promise<model.SendEmailResponse> {
-			try {
-				const info = await transporter.sendMail({
-					from: `"Anonymous Mailbox" <${env.MAIL_FROM}>`,
-					to: env.MAIL_TO,
-					subject: `[Anonymous Email] ${subject}`,
-					text: content,
-				});
+	.use(plugins.i18n)
+	.decorate(({ t }) => ({
+		contact: {
+			to: env.MAIL_TO,
+			async send({
+				subject,
+				content,
+			}: model.SendEmailRequest): Promise<model.SendEmailResponse> {
+				try {
+					const info = await transporter.sendMail({
+						from: `"Anonymous Mailbox" <${env.MAIL_FROM}>`,
+						to: env.MAIL_TO,
+						subject: `[Anonymous Email] ${subject}`,
+						text: content,
+					});
 
-				console.log("Message sent: %s", info.messageId);
+					console.log("Message sent: %s", info.messageId);
 
-				return {
-					success: true,
-					message: "Successfully sent the email.",
-				};
-			} catch (error) {
-				console.error("Failed to send email:", error);
-				throw new InternalServerError("An error occurred while sending the email.");
-			}
+					return {
+						success: true,
+						message: t($ => $.contact.sendMail.successfully),
+					};
+				} catch (error) {
+					console.error("Failed to send email:", error);
+					throw new InternalServerError(t($ => $.contact.sendMail.failed));
+				}
+			},
 		},
-	});
+	}));

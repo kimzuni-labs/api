@@ -11,9 +11,20 @@ export const en: LocaleTranslations = {
 		description: pkg.description,
 	},
 
+	contact: {
+		sendMail: {
+			successfully: "Email has been sent successfully.",
+			failed: "Failed to send email.",
+		},
+	},
+
 	error: {
 		validation: {
-			contact_no_subject_and_content: "subject or content is required.",
+			contact: {
+				subjectIsNotString: "subject must be a string.",
+				contentIsNotString: "content must be a string.",
+				noSubjectAndContent: "subject or content is required.",
+			},
 		},
 	},
 };

@@ -43,7 +43,7 @@ describe("Contact API (v1/contact)", () => {
 		expect(res.status).toBe(201);
 		expect(res.data).toEqual({
 			success: true,
-			message: "Successfully sent the email.",
+			message: "Email has been sent successfully.",
 		});
 
 		expect(sendMailSpy).toHaveBeenCalledTimes(1);
@@ -59,7 +59,7 @@ describe("Contact API (v1/contact)", () => {
 		expect(error).toBeNull();
 		expect(data).toEqual({
 			success: true,
-			message: "Successfully sent the email.",
+			message: "Email has been sent successfully.",
 		});
 
 		expect(sendMailSpy).toHaveBeenCalledTimes(1);
@@ -95,7 +95,7 @@ describe("Contact API (v1/contact)", () => {
 				expect(res.status).toBe(500);
 				expect(res.error?.value).toMatchObject({
 					error: true,
-					message: "An error occurred while sending the email.",
+					message: "Failed to send email.",
 				});
 			},
 		);
