@@ -12,7 +12,6 @@ export const health = new Elysia({
 	.use(HealthModel)
 	.get(
 		"",
-		() => HealthService.check(),
 		{
 			response: "healthCheck",
 			detail: {
@@ -20,4 +19,5 @@ export const health = new Elysia({
 				description: "The current operational status of the API server",
 			},
 		},
+		() => HealthService.check(),
 	);

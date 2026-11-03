@@ -15,11 +15,9 @@ export const app = new Elysia({
 	.use(errorHandler)
 	.use(plugins.i18n)
 	.use(plugins.scalar({
+		version: "1.76",
 		config: {
 			// https://scalar.com/products/api-references/configuration#properties
-			version: "1.68",
-			theme: "default",
-			hideModels: true,
 			persistAuth: true,
 			showOperationId: false,
 			defaultOpenFirstTag: false,

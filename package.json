@@ -6,10 +6,10 @@
 	"module": "src/index.js",
 	"private": true,
 	"scripts": {
-		"test": "bun test",
-		"test:coverage": "bun test --coverage",
-		"dev": "bun run --watch --no-clear-screen src/index.ts",
-		"start": "bun run src/index.ts",
+		"test": "NODE_ENV=test bun test",
+		"test:coverage": "NODE_ENV=test bun test --coverage",
+		"dev": "NODE_ENV=development bun run --watch --no-clear-screen src/index.ts",
+		"start": "NODE_ENV=production bun run src/index.ts",
 		"lint": "run-s lint:*",
 		"lint:markdown": "markdownlint-cli2 .",
 		"lint:yaml": "yamllint-js .",
@@ -17,16 +17,16 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
-		"@elysia/cors": "^1.4.2",
-		"@elysia/openapi": "^1.4.16",
-		"elysia": "^1.4.30",
+		"@elysia/cors": "rc",
+		"@elysia/openapi": "rc",
+		"elysia": "rc",
 		"i18next": "^26.4.2",
 		"nodemailer": "^10.0.10"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^21.2.3",
 		"@commitlint/config-conventional": "^21.2.3",
-		"@elysia/eden": "^1.4.10",
+		"@elysia/eden": "rc",
 		"@eslint/js": "^10.0.1",
 		"@semantic-release/changelog": "^7.0.0",
 		"@semantic-release/git": "^11.0.1",
@@ -42,6 +42,6 @@
 		"yamllint-js": "^0.2.4"
 	},
 	"patchedDependencies": {
-		"@elysia/openapi@1.4.16": "patches/@elysia%2Fopenapi@1.4.16.patch"
+		"@elysia/openapi@2.0.0-rc.0": "patches/@elysia%2Fopenapi@2.0.0-rc.0.patch"
 	}
 }

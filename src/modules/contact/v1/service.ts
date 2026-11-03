@@ -1,8 +1,7 @@
-import { Elysia } from "elysia";
+import { Elysia, InternalServerError } from "elysia";
 import nodemailer from "nodemailer";
 
 import { env } from "@/config";
-import { AppError } from "@/shared/error";
 
 import * as model from "./model";
 
@@ -43,7 +42,7 @@ export const contactService = new Elysia({ name: "v1.contact.service" })
 				};
 			} catch (error) {
 				console.error("Failed to send email:", error);
-				throw new AppError(500, "An error occurred while sending the email.");
+				throw new InternalServerError("An error occurred while sending the email.");
 			}
 		},
 	});

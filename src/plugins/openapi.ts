@@ -40,6 +40,9 @@ export const openapi = <
 		provider: null,
 		path: constants.API_DOCS_PATH,
 		specPath: constants.API_SPEC_PATH,
+		scalar: {
+			theme: "default",
+		},
 		exclude: {
 			paths: excludePaths,
 		},

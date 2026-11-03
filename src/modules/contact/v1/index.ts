@@ -13,9 +13,6 @@ export const contact = new Elysia({
 	.use(contactService)
 	.get(
 		"",
-		({ contact }) => ({
-			email: contact.to,
-		}),
 		{
 			response: "contactResponse",
 			detail: {
@@ -23,10 +20,12 @@ export const contact = new Elysia({
 				description: "Get the contact email address.",
 			},
 		},
+		({ contact }) => ({
+			email: contact.to,
+		}),
 	)
 	.post(
 		"",
-		async ({ status, body, contact }) => status(201, await contact.send(body)),
 		{
 			body: "sendEmailRequest",
 			response: {
@@ -37,4 +36,5 @@ export const contact = new Elysia({
 				description: "Send an email using the provided subject and content.",
 			},
 		},
+		async ({ status, body, contact }) => status(201, await contact.send(body)),
 	);

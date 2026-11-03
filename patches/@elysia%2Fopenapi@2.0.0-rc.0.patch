@@ -1,0 +1,43 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 2f64b6a515048f50ae11f2ab09f9578f0a601667..fe28875f3c5249d4a7d0247c67008f9848c38236 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -63,7 +63,18 @@ const openapi = ({ enabled = true, path = "/openapi", provider = "scalar", specP
+ 		};
+ 	};
+ 	return (host) => {
+-		const plugin = new Elysia({ name: "@elysia/openapi" });
++		const plugin = new Elysia({ name: "@elysia/openapi", seed: { specPath } });
++		plugin.get(specPath, {
++			error({ error }) {
++				console.log("[@elysia/openapi] error at specPath");
++				console.warn(error);
++			},
++			detail: { hide: true }
++		}, function openAPISchema() {
++			if (totalRoutes === host.routes.length && cachedSchema) return cachedSchema;
++			totalRoutes = host.routes.length;
++			return toFullSchema(toOpenAPISchema(host, exclude, references, mapJsonSchema, effectiveOpenAPIVersion));
++		});
+ 		if (provider === null) return host.use(plugin);
+ 		const page = () => new Response(provider === "swagger-ui" ? SwaggerUIRender(info, {
+ 			url: relativePath,
+@@ -78,17 +89,7 @@ const openapi = ({ enabled = true, path = "/openapi", provider = "scalar", specP
+ 			...scalar,
+ 			_integration: "elysiajs"
+ 		}, embedSpec ? JSON.stringify(totalRoutes === host.routes.length ? cachedSchema : toFullSchema(toOpenAPISchema(host, exclude, references, mapJsonSchema, effectiveOpenAPIVersion))) : void 0), { headers: { "content-type": "text/html; charset=utf8" } });
+-		plugin.get(path, { detail: { hide: true } }, embedSpec || isCloudflareWorker() ? page : page()).get(specPath, {
+-			error({ error }) {
+-				console.log("[@elysia/openapi] error at specPath");
+-				console.warn(error);
+-			},
+-			detail: { hide: true }
+-		}, function openAPISchema() {
+-			if (totalRoutes === host.routes.length && cachedSchema) return cachedSchema;
+-			totalRoutes = host.routes.length;
+-			return toFullSchema(toOpenAPISchema(host, exclude, references, mapJsonSchema, effectiveOpenAPIVersion));
+-		});
++		plugin.get(path, { detail: { hide: true } }, embedSpec || isCloudflareWorker() ? page : page());
+ 		return host.use(plugin);
+ 	};
+ };

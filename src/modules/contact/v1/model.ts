@@ -1,8 +1,8 @@
-import { Elysia, t } from "elysia";
+import { Elysia, t, type UnwrapSchema } from "elysia";
 
 
 
-export type ContactResponse = typeof contactResponse.static;
+export type ContactResponse = UnwrapSchema<typeof contactResponse>;
 export const contactResponse = t.Object({
 	email: t.String({ format: "email" }),
 }, {
@@ -11,7 +11,7 @@ export const contactResponse = t.Object({
 
 
 
-export type SendEmailRequest = typeof sendEmailRequest.static;
+export type SendEmailRequest = UnwrapSchema<typeof sendEmailRequest>;
 export const sendEmailRequest = t.Object({
 	subject: t.Optional(t.String()),
 	content: t.Optional(t.String()),
@@ -21,9 +21,9 @@ export const sendEmailRequest = t.Object({
 	error: "error.validation.contact_no_subject_and_content",
 });
 
-export type SendEmailResponse = typeof sendEmailResponse.static;
+export type SendEmailResponse = UnwrapSchema<typeof sendEmailResponse>;
 export const sendEmailResponse = t.Object({
-	success: t.Boolean(),
+	success: t.Literal(true),
 	message: t.String(),
 }, {
 	title: "Send Email Response",

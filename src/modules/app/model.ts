@@ -1,8 +1,8 @@
-import { Elysia, t } from "elysia";
+import { Elysia, t, type UnwrapSchema } from "elysia";
 
 
 
-export type Info = typeof info.static;
+export type Info = UnwrapSchema<typeof info>;
 export const info = t.Object({
 	title: t.String(),
 	description: t.String(),

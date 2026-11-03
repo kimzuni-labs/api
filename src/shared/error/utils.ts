@@ -1,7 +1,6 @@
 import { STATUS_CODES } from "node:http";
 import { t } from "elysia";
-import { CloneType } from "@sinclair/typebox";
-import type { TObject, TProperties, ObjectOptions } from "@sinclair/typebox";
+import type { TObject, TProperties, TObjectOptions } from "typebox";
 
 
 
@@ -17,14 +16,18 @@ const baseErrorResponse = t.Object({
 }, {
 	title: "Error Response",
 	description: "All error responses follow this standardized structure.",
+	additionalProperties: true,
 });
 
 export const createErrorResponse = <
 	T extends TProperties,
 >(
 	obj: TObject<T>,
-	opts?: ObjectOptions,
-) => t.Composite([
-	CloneType(baseErrorResponse),
-	obj,
-], opts);
+	opts?: TObjectOptions,
+) => t.Object({
+	...baseErrorResponse.properties,
+	...obj.properties,
+}, {
+	additionalProperties: true,
+	...opts,
+});

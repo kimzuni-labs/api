@@ -41,4 +41,4 @@ export const locale = new Elysia({
 			ctx.lang = lang;
 		}
 	})
-	.as("scoped");
+	.as("plugin");

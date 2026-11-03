@@ -74,10 +74,8 @@ describe("Contact API (v1/contact)", () => {
 		expect(res.status).toBe(422);
 		expect(res.error?.value).toMatchObject({
 			error: true,
+			status: 422,
 			message: "subject or content is required.",
-			details: {
-				location: "body",
-			},
 		});
 
 		expect(sendMailSpy).not.toHaveBeenCalled();
@@ -97,9 +95,7 @@ describe("Contact API (v1/contact)", () => {
 				expect(res.status).toBe(500);
 				expect(res.error?.value).toMatchObject({
 					error: true,
-					status: 500,
 					message: "An error occurred while sending the email.",
-					details: null,
 				});
 			},
 		);

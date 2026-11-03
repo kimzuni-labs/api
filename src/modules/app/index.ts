@@ -15,11 +15,6 @@ export const app = new Elysia({
 	.use(AppModel)
 	.get(
 		"/",
-		({ t }) => ({
-			title: t($ => $.app.title),
-			description: t($ => $.app.description),
-			version: info.version,
-		}),
 		{
 			response: "info",
 			detail: {
@@ -27,4 +22,9 @@ export const app = new Elysia({
 				description: "Returns basic information about the application.",
 			},
 		},
+		({ t }) => ({
+			title: t($ => $.app.title),
+			description: t($ => $.app.description),
+			version: info.version,
+		}),
 	);

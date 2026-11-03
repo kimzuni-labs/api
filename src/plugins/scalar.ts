@@ -6,14 +6,15 @@ import { url } from "./url";
 
 
 
-const VERSION = "1.68";
-const CDN = `https://cdn.jsdelivr.net/npm/@scalar/api-reference@${VERSION}`;
+const VERSION = "latest";
+const CDN = (v: string) => `https://cdn.jsdelivr.net/npm/@scalar/api-reference@${v}`;
 
 
 
 interface ScalarOptions {
 	title?: string,
 	description?: string,
+	version?: string,
 	config?: Record<string, unknown>,
 }
 
@@ -22,6 +23,7 @@ interface ScalarOptions {
 const getHTML = ({
 	title,
 	description,
+	version,
 	config,
 }: Required<ScalarOptions>) => `
 <!doctype html>
@@ -40,7 +42,7 @@ const getHTML = ({
 		<div id="app"></div>
 
 		<!-- Load the Script -->
-		<script src="${CDN}"></script>
+		<script src="${CDN(version)}"></script>
 
 		<!-- Initialize the Scalar API Reference -->
 		<script>
@@ -55,6 +57,7 @@ const getHTML = ({
 export const scalar = ({
 	title,
 	description,
+	version = VERSION,
 	config,
 }: ScalarOptions = {}) => {
 	const plugin = new Elysia({
@@ -64,10 +67,12 @@ export const scalar = ({
 
 	plugin.get(
 		constants.API_DOCS_PATH,
+		{ detail: { hide: true } },
 		({ url }) => new Response(
 			getHTML({
 				title: title ?? app.title,
 				description: description ?? app.description,
+				version,
 				config: {
 					servers: [
 						{
@@ -82,7 +87,6 @@ export const scalar = ({
 				headers: { "content-type": "text/html; charset=utf8" },
 			},
 		),
-		{ detail: { hide: true } },
 	);
 
 	return plugin;

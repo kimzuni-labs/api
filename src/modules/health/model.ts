@@ -1,10 +1,10 @@
-import { Elysia, t } from "elysia";
+import { Elysia, t, type UnwrapSchema } from "elysia";
 
 import * as schemas from "@/schemas";
 
 
 
-export type HealthCheck = typeof healthCheck.static;
+export type HealthCheck = UnwrapSchema<typeof healthCheck>;
 export const healthCheck = t.Object({
 	healthy: t.Literal(true),
 	version: t.String(),

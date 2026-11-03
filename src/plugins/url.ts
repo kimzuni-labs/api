@@ -17,4 +17,4 @@ export const url = new Elysia({
 			url,
 		};
 	})
-	.as("scoped");
+	.as("plugin");
