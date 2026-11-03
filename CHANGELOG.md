@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/kimzuni-labs/api/compare/v1.0.2...v1.0.3) (2026-11-03)
+
+
+### Bug Fixes
+
+* **i18n:** response message ([95389a7](https://github.com/kimzuni-labs/api/commit/95389a75af9cb20bc1528148f0ee1d6a3f5af1f4))
+
 ## [1.0.2](https://github.com/kimzuni-labs/api/compare/v1.0.1...v1.0.2) (2026-10-25)
 
 
